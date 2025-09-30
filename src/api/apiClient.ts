@@ -1,5 +1,3 @@
-const BASE_URL: string = "https://v2.api.noroff.dev";
-
 // register user
 export async function registerUser(
   name: string,
