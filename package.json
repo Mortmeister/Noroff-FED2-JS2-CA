@@ -8,9 +8,6 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "engines": {
-    "node": "18.x"
-  },
   "devDependencies": {
     "daisyui": "^5.1.14",
     "typescript": "~5.8.3",
