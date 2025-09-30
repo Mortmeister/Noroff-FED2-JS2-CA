@@ -1,7 +1,7 @@
 const TOKEN_KEY = "authToken";
 const USER_KEY = "authUser";
 
-export function saveAuth(token: string, user: object) {
+export function saveAuth(token: string) {
   localStorage.setItem(TOKEN_KEY, token);
 }
 
