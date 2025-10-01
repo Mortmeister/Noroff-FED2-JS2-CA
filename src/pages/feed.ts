@@ -37,6 +37,7 @@ if (loginLink) {
     }
   });
 }
+
 if (searchForPostEl) {
   searchForPostEl?.addEventListener("submit", async (event) => {
     event.preventDefault();

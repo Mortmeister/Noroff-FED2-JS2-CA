@@ -6,6 +6,40 @@ import {
 } from "../api/apiClient";
 import { createUserCard } from "../components/cards/userUi";
 import { createCard } from "../components/cards/postUi";
+import { createHeader } from "../components/header/header";
+
+const headerEl = document.getElementById("headerEl");
+if (headerEl) {
+  headerEl.innerHTML = createHeader();
+}
+
+const loginLink = document.getElementById("loginLink");
+
+if (loginLink) {
+  loginLink.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const updateLinkText = () => {
+      const token = localStorage.getItem("authToken");
+      loginLink.innerText = token ? "Log out" : "Log in";
+    };
+
+    updateLinkText();
+
+    const token = localStorage.getItem("authToken");
+
+    if (token) {
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("username"); // if storing username
+      updateLinkText();
+      alert("You have been logged out.");
+      window.location.href = "./login.html"; // optional redirect
+    } else {
+      // Redirect to login
+      window.location.href = "../login.html";
+    }
+  });
+}
 
 const urlParams = new URLSearchParams(window.location.search);
 const authorName = urlParams.get("author");

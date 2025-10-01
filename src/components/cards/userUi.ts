@@ -17,7 +17,7 @@ export function createUserCard(user: {
     </div>
 
     <!-- Name & Email -->
-    <h2 class="text-2xl font-bold mb-1">${user.name}</h2>
+    <h2 class="text-2xl text-gray-500 font-bold mb-1">${user.name}</h2>
     <p class="text-sm text-gray-500 mb-4">${user.email}</p>
 
     <!-- Bio -->
@@ -26,13 +26,13 @@ export function createUserCard(user: {
     <!-- Followers / Following -->
     <div class="flex justify-center gap-6 mb-4">
       <div>
-        <span class="font-semibold text-lg">${
+        <span class="font-semibold text-gray-500 text-lg">${
           user._count?.followers || 0
         }</span>
         <p class="text-gray-500 text-sm">Followers</p>
       </div>
       <div>
-        <span class="font-semibold text-lg">${
+        <span class="font-semibold text-gray-500 text-lg">${
           user._count?.following || 0
         }</span>
         <p class="text-gray-500 text-sm">Following</p>

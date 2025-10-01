@@ -41,7 +41,7 @@ export function createCard(
       </a>
 
       <div class="card-body">
-        <h2 class="card-title">${title ?? "Untitled post"}</h2>
+        <h2 class="card-title ">${title ?? "Untitled post"}</h2>
         <p class="text-sm text-gray-500">
           Created: ${new Date(
             created
@@ -116,6 +116,7 @@ export function createCard(
     </div>
   `;
 }
+
 export function createProfileCard(
   id: string,
   title: string,
@@ -125,40 +126,41 @@ export function createProfileCard(
   media?: { url?: string; alt?: string }
 ) {
   return `
-    <article 
-      class="border rounded-md p-4 shadow bg-white text-black"
-      data-post-id="${id}"
-    >
-      <h3 class="font-bold text-lg">${title ?? "Untitled post"}</h3>
-      <p class="text-sm text-gray-500">Created: ${new Date(
-        created
-      ).toLocaleDateString()}</p>
-      <p class="text-sm text-gray-500">Updated: ${new Date(
-        updated
-      ).toLocaleDateString()}</p>
-      <p class="mt-2">${body ?? ""}</p>
+    <div class="card bg-white shadow-sm w-96 mb-6" data-post-id="${id}">
       ${
         media?.url
-          ? `<img src="${media.url}" alt="${
+          ? `<figure>
+              <img src="${media.url}" alt="${
               media.alt || "Post image"
-            }" class="mt-4 rounded"/>`
+            }" class="object-cover w-full rounded-t"/>
+            </figure>`
           : ""
       }
-
-      <div class="mt-4 flex gap-2">
-        <button 
-          class="edit-btn bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded"
-          data-id="${id}"
-        >
-          Edit
-        </button>
-        <button 
-          class="delete-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
-          data-id="${id}"
-        >
-          Delete
-        </button>
+      <div class="card-body p-4">
+        <h2 class="card-title text-gray-500">${title ?? "Untitled post"}</h2>
+        <p class="text-sm text-gray-500">
+          Created: ${new Date(
+            created
+          ).toLocaleDateString()} • Updated: ${new Date(
+    updated
+  ).toLocaleDateString()}
+        </p>
+        <p class="mt-2 text-gray-500">${body ?? ""}</p>
+        <div class="mt-4 flex gap-2">
+          <button 
+            class="edit-btn bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded"
+            data-id="${id}"
+          >
+            Edit
+          </button>
+          <button 
+            class="delete-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+            data-id="${id}"
+          >
+            Delete
+          </button>
+        </div>
       </div>
-    </article>
+    </div>
   `;
 }

@@ -1,7 +1,68 @@
-import { createPost, getPostsByUsername } from "../api/apiClient";
-import { createProfileCard } from "../components/cards/postUi";
+import {
+  createPost,
+  getPostsByUsername,
+  getSingleProfile,
+} from "../api/apiClient";
+import { createProfileCard, createCard } from "../components/cards/postUi";
+import { createUserCard } from "../components/cards/userUi";
 import { deletePost } from "../api/apiClient";
 import { updateImagePreview } from "../components/forms/preview";
+import { createHeader } from "../components/header/header";
+
+const headerEl = document.getElementById("headerEl");
+if (headerEl) {
+  headerEl.innerHTML = createHeader();
+}
+
+const loginLink = document.getElementById("loginLink");
+
+if (loginLink) {
+  loginLink.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const updateLinkText = () => {
+      const token = localStorage.getItem("authToken");
+      loginLink.innerText = token ? "Log out" : "Log in";
+    };
+
+    updateLinkText();
+
+    const token = localStorage.getItem("authToken");
+
+    if (token) {
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("username"); // if storing username
+      updateLinkText();
+      alert("You have been logged out.");
+      window.location.href = "./login.html"; // optional redirect
+    } else {
+      // Redirect to login
+      window.location.href = "../login.html";
+    }
+  });
+}
+
+const profileContainerEl = document.getElementById("profileContainer");
+
+async function renderUserProfile() {
+  const profile = localStorage.getItem("username");
+  if (!profile) return;
+
+  try {
+    const user = await getSingleProfile(profile);
+
+    if (profileContainerEl && user) {
+      profileContainerEl.innerHTML = createUserCard(user);
+    }
+  } catch (err) {
+    console.error("Failed to load user profile:", err);
+    if (profileContainerEl) {
+      profileContainerEl.innerHTML = `<p class="text-red-500">Failed to load user profile.</p>`;
+    }
+  }
+}
+
+renderUserProfile();
 
 const postImageUrl = document.getElementById("url") as HTMLInputElement;
 const imageURLPreview = document.getElementById(

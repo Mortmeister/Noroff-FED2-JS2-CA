@@ -86,12 +86,15 @@ export async function deletePost(id: string) {
 }
 
 export async function getPostById(id: string, token: string) {
-  const response = await fetch(`https://v2.api.noroff.dev/social/posts/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
-    },
-  });
+  const response = await fetch(
+    `https://v2.api.noroff.dev/social/posts/${id}?_comments=true&_reactions=true&_author=true`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
+      },
+    }
+  );
   if (!response.ok) throw new Error("Failed to fetch post");
   const result = await response.json();
   return result.data;
@@ -100,32 +103,43 @@ export async function getPostById(id: string, token: string) {
 export async function updatePost(
   postId: string,
   token: string,
-  payload: {
-    title: string;
-    body: string;
-    media?: { url: string; alt: string };
-    tags?: string[];
-  }
+  title: string,
+  body: string,
+  mediaUrl?: string,
+  mediaAlt?: string,
+  tags?: string[]
 ) {
-  const response = await fetch(
-    `https://v2.api.noroff.dev/social/posts/${postId}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-        "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
-      },
-      body: JSON.stringify(payload),
+  try {
+    const response = await fetch(
+      `https://v2.api.noroff.dev/social/posts/${postId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
+        },
+        body: JSON.stringify({
+          title,
+          body,
+          media: mediaUrl ? { url: mediaUrl, alt: mediaAlt || "" } : undefined,
+          tags,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err.message || "Failed to update post");
     }
-  );
 
-  if (!response.ok) {
-    const err = await response.json();
-    throw new Error(err.message || "Failed to update post");
+    const result = await response.json();
+    console.log("Post updated:", result);
+    return result;
+  } catch (err) {
+    console.error("Error updating post:", err);
+    throw err;
   }
-
-  return response.json(); // returns the updated post
 }
 
 //get all posts
