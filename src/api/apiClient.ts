@@ -1,4 +1,3 @@
-// register user
 export async function registerUser(
   name: string,
   email: string,
@@ -21,12 +20,10 @@ export async function registerUser(
 
     if (response.ok) {
       const result = await response.json();
-      console.log("New user created", result);
       window.location.href = "./index.html";
       return result;
     } else {
       const error = await response.json();
-      console.log("failed login", error);
       throw new Error(error.message);
     }
   } catch (err) {
@@ -34,7 +31,6 @@ export async function registerUser(
   }
 }
 
-// login
 export async function loginUserFromForm(email: string, password: string) {
   try {
     const response = await fetch("https://v2.api.noroff.dev/auth/login", {
@@ -48,12 +44,9 @@ export async function loginUserFromForm(email: string, password: string) {
 
     if (response.ok) {
       const result = await response.json();
-      console.log("login successful", result);
-
       return result;
     } else {
       const error = await response.json();
-      console.log("failed login", error);
       throw new Error(error.message);
     }
   } catch (err) {
@@ -61,7 +54,6 @@ export async function loginUserFromForm(email: string, password: string) {
   }
 }
 
-// Delete
 export async function deletePost(id: string) {
   const token = localStorage.getItem("authToken");
   try {
@@ -78,7 +70,7 @@ export async function deletePost(id: string) {
 
     if (response.ok) {
       const result = await response.json();
-      console.log(result);
+      return result;
     }
   } catch (err) {
     console.error(err);
@@ -134,7 +126,6 @@ export async function updatePost(
     }
 
     const result = await response.json();
-    console.log("Post updated:", result);
     return result;
   } catch (err) {
     console.error("Error updating post:", err);
@@ -160,7 +151,6 @@ export async function getAllPosts() {
 
     if (response.ok) {
       const result = await response.json();
-      console.log(result);
       return result.data;
     }
   } catch (err) {
@@ -271,7 +261,6 @@ export async function searchForPost(query: string) {
     }
 
     const result = await response.json();
-    console.log("Search results:", result.data);
     return result.data;
   } catch (err) {
     console.error("Error while searching posts:", err);
@@ -300,7 +289,6 @@ export async function getSingleProfile(name: string) {
     }
 
     const result = await response.json();
-    console.log("Search results:", result.data);
     return result.data;
   } catch (err) {
     console.error("Error while searching posts:", err);
@@ -336,7 +324,6 @@ export async function getAllPostsFromUser(name: string) {
     }
 
     const result = await response.json();
-    console.log("Search results:", result.data);
     return result.data;
   } catch (err) {
     console.error("Error while searching posts:", err);

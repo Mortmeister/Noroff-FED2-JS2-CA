@@ -127,18 +127,6 @@ async function renderFeed() {
 renderFeed();
 
 if (feedEl) {
-  feedEl?.addEventListener("click", async (event) => {
-    const target = event.target as HTMLAnchorElement;
-
-    if (target.classList.contains("single-post")) {
-      const postId = target.dataset.postId;
-
-      console.log(postId);
-    }
-  });
-}
-
-if (feedEl) {
   feedEl.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -158,8 +146,7 @@ if (feedEl) {
       }
 
       try {
-        const result = await commentOnPost(postId, body, token);
-        console.log("Comment posted:", result);
+        await commentOnPost(postId, body, token);
         target.reset();
       } catch (err) {
         console.error("Failed to post comment:", err);

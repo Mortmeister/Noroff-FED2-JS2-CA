@@ -1,11 +1,11 @@
 import { loginForm } from "../components/forms/loginForm";
 import { loginUserFromForm } from "../api/apiClient";
 import { saveAuth } from "../storage/authStorage";
-import { createHeader } from "../components/header/header";
+import { createHeaderFromLogin } from "../components/header/header";
 
 const headerEl = document.getElementById("headerEl");
 if (headerEl) {
-  headerEl.innerHTML = createHeader();
+  headerEl.innerHTML = createHeaderFromLogin();
 }
 
 const loginLink = document.getElementById("loginLink");

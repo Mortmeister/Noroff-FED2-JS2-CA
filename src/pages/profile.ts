@@ -152,14 +152,12 @@ myPostsEl?.addEventListener("click", async (event) => {
 
   if (target.classList.contains("delete-btn")) {
     const postId = target.dataset.id!;
-    console.log("Delete post:", postId, target);
     deletePost(postId);
     renderFeed();
   }
 
   if (target.classList.contains("edit-btn")) {
     const postId = target.dataset.id!;
-    console.log("Edit post:", postId);
     window.location.href = `/update.html?postId=${postId}`;
   }
 });

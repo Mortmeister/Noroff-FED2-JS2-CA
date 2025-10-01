@@ -72,7 +72,6 @@ followBtn.addEventListener("click", async () => {
       isFollowing = false;
     }
   } catch (err) {
-    console.error("Failed to update follow status:", err);
     alert("Could not update follow status. Try again.");
   }
 });

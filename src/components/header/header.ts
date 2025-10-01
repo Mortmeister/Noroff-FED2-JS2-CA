@@ -36,9 +36,26 @@ export function createHeader() {
           ${loginText}
         </a>
       </div>
+    </div>
+  </nav>`;
+}
 
-      
+export function createHeaderFromLogin() {
+  const token = localStorage.getItem("authToken");
+  const loginText = token ? "Log out" : "Log in";
 
+  return `
+  <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+    <div class="flex justify-end items-center mx-auto max-w-screen-xl">
+      <a
+        id="loginLink"
+        class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 
+               focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 
+               py-2 lg:py-2.5 dark:hover:bg-gray-700 focus:outline-none 
+               dark:focus:ring-gray-800"
+      >
+        ${loginText}
+      </a>
     </div>
   </nav>`;
 }

@@ -1,10 +1,10 @@
 import { registerForm } from "../components/forms/registerForm";
 import { registerUser } from "../api/apiClient";
-import { createHeader } from "../components/header/header";
+import { createHeaderFromLogin } from "../components/header/header";
 
 const headerEl = document.getElementById("headerEl");
 if (headerEl) {
-  headerEl.innerHTML = createHeader();
+  headerEl.innerHTML = createHeaderFromLogin();
 }
 
 const loginLink = document.getElementById("loginLink");

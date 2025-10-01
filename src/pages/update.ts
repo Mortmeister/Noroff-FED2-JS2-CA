@@ -94,8 +94,7 @@ updateForm.addEventListener("submit", async (e) => {
   };
 
   try {
-    const updatedPost = await updatePost(postId, token!, payload);
-    console.log("Post updated:", updatedPost);
+    await updatePost(postId, token!, payload);
     alert("Post updated successfully!");
     window.location.href = "/profile.html";
   } catch (err) {
