@@ -83,6 +83,8 @@ updateForm.addEventListener("submit", async (event) => {
   const mediaAlt = String(formData.get("mediaAlt") || "");
   const tags = String(formData.get("tags") || "");
 
+  const tagsArray = tags.split(","); // split by commas
+
   try {
     await updatePost(
       postId,
@@ -91,7 +93,7 @@ updateForm.addEventListener("submit", async (event) => {
       body,
       mediaUrl || undefined,
       mediaAlt || undefined,
-      tags.length ? tags : undefined
+      tagsArray
     );
     alert("Post updated successfully!");
     window.location.href = "/profile.html";
