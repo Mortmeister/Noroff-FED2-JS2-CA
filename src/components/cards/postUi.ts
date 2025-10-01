@@ -1,3 +1,19 @@
+/**
+//  * createCard generates an HTML card  representing a social media post containing author, media, reactions, and comments.
+//  
+//  * @param {string} title - The title of the post.
+//  * @param {string} body - The main content of the post.
+//  * @param {string} created - Represents the date the post was created. 
+//  * @param {string} updated - Represents the date the post was updated.
+//  * @param {{ url?: string, alt?: string }} [media] -  Media object containing image URL and alt text.
+//  * @param {{ symbol: string, count: number }[]} [reactions] - List of reactions (emojis and count of reactions).
+//  * @param {{ body: string, author: { name: string } }[]} [comments] -  list of comments with author names.
+//  * @param {number} [postId] - The unique ID for the post.
+//  * @param {{ name: string, avatar?: { url?: string, alt?: string } }} [author] - The post author details.
+//  *
+//  * @returns {string} An HTML string representing the post card.
+*/
+
 export function createCard(
   title: string,
   body: string,
@@ -51,7 +67,7 @@ export function createCard(
         </p>
         <p>${body ?? ""}</p>
 
-        <!-- Reactions -->
+        
         <div class="mt-4">
           <h4 class="font-semibold text-sm mb-2">Reactions:</h4>
           ${
@@ -69,20 +85,9 @@ export function createCard(
                 </div>`
               : `<p class="text-sm text-gray-400">No reactions yet</p>`
           }
-          <form class="add-reaction-form mt-2 flex gap-2" data-postid="${postId}">
-            <input 
-              type="text" 
-              name="symbol" 
-              placeholder="😀" 
-              maxlength="2" 
-              class="input input-bordered input-sm w-16"
-              required
-            />
-            <button type="submit" class="btn btn-sm btn-primary">React</button>
-          </form>
         </div>
 
-        <!-- Comments -->
+        
         <div class="mt-4 border-t pt-2">
           <h4 class="font-semibold text-sm mb-2">Comments:</h4>
           ${

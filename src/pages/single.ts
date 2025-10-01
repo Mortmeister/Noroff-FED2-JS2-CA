@@ -24,12 +24,11 @@ if (loginLink) {
 
     if (token) {
       localStorage.removeItem("authToken");
-      localStorage.removeItem("username"); // if storing username
+      localStorage.removeItem("username");
       updateLinkText();
       alert("You have been logged out.");
-      window.location.href = "./login.html"; // optional redirect
+      window.location.href = "./login.html";
     } else {
-      // Redirect to login
       window.location.href = "../login.html";
     }
   });
@@ -40,7 +39,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get("postId");
 
 async function renderFeed() {
-  const token = localStorage.getItem("authToken"); // 👈 stored at login
+  const token = localStorage.getItem("authToken");
   if (!token) {
     return;
   }
@@ -65,4 +64,3 @@ async function renderFeed() {
 }
 
 renderFeed();
-console.log(postId);

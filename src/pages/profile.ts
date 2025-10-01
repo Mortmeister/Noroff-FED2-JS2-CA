@@ -31,12 +31,11 @@ if (loginLink) {
 
     if (token) {
       localStorage.removeItem("authToken");
-      localStorage.removeItem("username"); // if storing username
+      localStorage.removeItem("username");
       updateLinkText();
       alert("You have been logged out.");
-      window.location.href = "./login.html"; // optional redirect
+      window.location.href = "./login.html";
     } else {
-      // Redirect to login
       window.location.href = "../login.html";
     }
   });
@@ -109,11 +108,10 @@ async function handleCreatePost(event: Event) {
   };
 
   try {
-    const result = await createPost(token, payload);
-    console.log("Post created:", result);
+    await createPost(token, payload);
     alert("Post successfully created!");
     postFormEl.reset();
-    renderFeed(); // 👈 re-render feed after posting
+    renderFeed();
   } catch (err) {
     console.error(err);
     alert("Something went wrong while creating the post.");
@@ -131,7 +129,7 @@ async function renderFeed() {
     myPostsEl!.innerHTML = postsPersonal
       .map((post) =>
         createProfileCard(
-          post.id, // 👈 pass id first
+          post.id,
           post.title,
           post.body,
           post.created,
@@ -157,13 +155,11 @@ myPostsEl?.addEventListener("click", async (event) => {
     console.log("Delete post:", postId, target);
     deletePost(postId);
     renderFeed();
-    // 👉 call deletePost(postId)
   }
 
   if (target.classList.contains("edit-btn")) {
     const postId = target.dataset.id!;
     console.log("Edit post:", postId);
     window.location.href = `/update.html?postId=${postId}`;
-    // 👉 open edit form or modal
   }
 });

@@ -10,7 +10,7 @@ export function registerForm(): string {
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
     <form id="registerForm" class="space-y-6">
       
-      <!-- Name -->
+      
       <div>
         <label class="block text-sm font-medium text-white">Username</label>
         <input
@@ -22,7 +22,7 @@ export function registerForm(): string {
         />
       </div>
 
-      <!-- Email -->
+      
       <div>
         <label class="block text-sm font-medium text-white">Email</label>
         <input
@@ -34,7 +34,7 @@ export function registerForm(): string {
         />
       </div>
 
-      <!-- Password -->
+      
       <div>
         <label class="block text-sm font-medium text-white">Password</label>
         <input
@@ -50,7 +50,7 @@ export function registerForm(): string {
         </p>
       </div>
 
-      <!-- Bio -->
+      
       <div>
         <label class="block text-sm font-medium text-white">Bio</label>
         <textarea
@@ -61,7 +61,7 @@ export function registerForm(): string {
         ></textarea>
       </div>
 
-      <!-- Avatar -->
+      
       <div>
         <label class="block text-sm font-medium text-white">Avatar URL</label>
         <input
@@ -72,7 +72,7 @@ export function registerForm(): string {
         />
       </div>
 
-      <!-- Submit -->
+      
       <div>
         <button
           type="submit"

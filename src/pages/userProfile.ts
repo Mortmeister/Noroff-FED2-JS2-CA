@@ -30,12 +30,11 @@ if (loginLink) {
 
     if (token) {
       localStorage.removeItem("authToken");
-      localStorage.removeItem("username"); // if storing username
+      localStorage.removeItem("username");
       updateLinkText();
       alert("You have been logged out.");
-      window.location.href = "./login.html"; // optional redirect
+      window.location.href = "./login.html";
     } else {
-      // Redirect to login
       window.location.href = "../login.html";
     }
   });
@@ -51,7 +50,6 @@ const textState1 = "follow";
 const textState2 = "Unfollow";
 
 async function returnFollowing() {
-  //
   const result = await getSingleProfile(myUser);
   const { following } = result;
 
@@ -99,7 +97,7 @@ async function renderUserProfile() {
 renderUserProfile();
 
 async function renderFeed() {
-  const token = localStorage.getItem("authToken"); // 👈 stored at login
+  const token = localStorage.getItem("authToken");
   if (!token) {
     return;
   }

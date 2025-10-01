@@ -188,6 +188,20 @@ export async function getPostsByUsername(username: string) {
   return result.data;
 }
 
+/**
+ * createPost makes a new post to the Noroff API with method POST.
+ *
+ * @async
+ * @function createPost
+ * @param {string} token - The authentication token for the logged-in user.
+ * @param {Object} payload - Contains the data for the new post.
+ * @param {string} payload.title - Contains the title of the post.
+ * @param {string} payload.body - Contains the body content of the post.
+ * @param {{ url: string, alt: string }} [payload.media] -  media object containing the URL and alt text for an image.
+ * @param {string[]} [payload.tags] - List of tags in the post.
+ * @returns {Promise<Object>} The post data returned from the API.
+ * @throws {Error} If the API request fails or the response is not OK.
+ */
 export async function createPost(
   token: string,
   payload: {
@@ -225,7 +239,7 @@ export async function commentOnPost(id: number, body: string, token: string) {
         Authorization: `Bearer ${token}`,
         "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
       },
-      body: JSON.stringify({ body }), // 👈 only send the body as string
+      body: JSON.stringify({ body }),
     }
   );
 
@@ -294,6 +308,14 @@ export async function getSingleProfile(name: string) {
   }
 }
 
+/**
+ * Fetches all posts for a specific user from the Noroff API, and includes optional queries like comments, reactions, and author information.
+ *
+ * @param {string} name - The username of the profile to fetch posts for.
+ * @returns {Promise<Post[]>} An array of post objects.
+ * @throws Will throw an error if the request fails.
+ */
+
 export async function getAllPostsFromUser(name: string) {
   const token = localStorage.getItem("authToken");
   try {
@@ -322,7 +344,6 @@ export async function getAllPostsFromUser(name: string) {
   }
 }
 
-// /social/profiles/<name>/follow PUT
 export async function followUser(name: string) {
   const token = localStorage.getItem("authToken");
   const response = await fetch(
@@ -342,7 +363,7 @@ export async function followUser(name: string) {
     throw new Error(err.message || "Failed to update post");
   }
 
-  return response.json(); // returns the updated post
+  return response.json();
 }
 
 export async function unfollowUser(name: string) {
@@ -364,6 +385,5 @@ export async function unfollowUser(name: string) {
     throw new Error(err.message || "Failed to update post");
   }
 
-  return response.json(); // returns the updated post
+  return response.json();
 }
-// /social/profiles/<name>/unfollow PUT
