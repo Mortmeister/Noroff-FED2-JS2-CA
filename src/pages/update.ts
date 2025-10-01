@@ -70,31 +70,29 @@ async function loadPost() {
 
 loadPost();
 
-updateForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+updateForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
   if (!postId) return;
 
   const token = localStorage.getItem("authToken");
   const formData = new FormData(updateForm);
-  const data = Object.fromEntries(formData.entries()) as {
-    title: string;
-    body: string;
-    mediaUrl: string;
-    mediaAlt: string;
-    tags: string;
-  };
 
-  const payload = {
-    title: data.title,
-    body: data.body,
-    media: data.mediaUrl
-      ? { url: data.mediaUrl, alt: data.mediaAlt || "" }
-      : undefined,
-    tags: data.tags ? data.tags.split(",").map((t) => t.trim()) : [],
-  };
+  const title = String(formData.get("title") || "");
+  const body = String(formData.get("body") || "");
+  const mediaUrl = String(formData.get("mediaUrl") || "");
+  const mediaAlt = String(formData.get("mediaAlt") || "");
+  const tags = String(formData.get("tags") || "");
 
   try {
-    await updatePost(postId, token!, payload);
+    await updatePost(
+      postId,
+      token!,
+      title,
+      body,
+      mediaUrl || undefined,
+      mediaAlt || undefined,
+      tags.length ? tags : undefined
+    );
     alert("Post updated successfully!");
     window.location.href = "/profile.html";
   } catch (err) {
